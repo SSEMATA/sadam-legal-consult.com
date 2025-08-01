@@ -28,6 +28,37 @@
       height: 900px;
       border: none;
     }
+    .mobile-icons {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  background: #007acc;
+  padding: 10px 30px;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.mobile-icons a {
+  text-decoration: none;
+  color: white;
+}
+
+.mobile-icons i {
+  font-size: 24px;
+}
+
+/* Show only on small devices */
+@media (max-width: 768px) {
+  .mobile-icons {
+    display: flex;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -35,5 +66,44 @@
     <h2>Book a Consultation</h2>
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfEbGvaeSUp5mqSzC248iCXeYGbNoNYlGh2D3dfj24czCQVcw/viewform?embedded=true" width="640" height="1841" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
   </div>
+  <div id="mobileNav" class="mobile-icons">
+  <a href="index.html"><i class="fas fa-home"></i></a>
+  <a href="#search"><i class="fas fa-search"></i></a>
+  <a href="consultation.html"><i class="fas fa-briefcase"></i></a>
+</div>
 </body>
+<script>
+    let lastScrollTop = 0;
+  let nav = document.getElementById('mobileNav');
+  let idleTimer;
+
+  function hideNav() {
+    nav.style.opacity = '0';
+    nav.style.transform = 'translateY(100%)';
+  }
+
+  function showNav() {
+    nav.style.opacity = '1';
+    nav.style.transform = 'translateY(0)';
+  }
+
+  window.addEventListener('scroll', function () {
+    let st = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (st < lastScrollTop) {
+      // Scrolling up
+      showNav();
+    } else {
+      // Scrolling down
+      hideNav();
+    }
+
+    lastScrollTop = st <= 0 ? 0 : st;
+
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+      hideNav();
+    }, 3000); // 3 seconds idle = hide
+  });
+</script>
 </html>

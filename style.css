@@ -867,3 +867,34 @@ body {
       background-color: #25D366;
       color: white;
     }
+
+ .mobile-icons {
+  display: none;
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  background: #007acc;
+  padding: 10px 30px;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.mobile-icons a {
+  text-decoration: none;
+  color: white;
+}
+
+.mobile-icons i {
+  font-size: 24px;
+}
+
+/* Show only on small devices */
+@media (max-width: 768px) {
+  .mobile-icons {
+    display: flex;
+  }
+}

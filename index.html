@@ -229,6 +229,11 @@
   </div>
 </div>
 
+<div id="mobileNav" class="mobile-icons">
+  <a href="index.html"><i class="fas fa-home"></i></a>
+  <a href="#search"><i class="fas fa-search"></i></a>
+  <a href="consultation.html"><i class="fas fa-briefcase"></i></a>
+</div>
   <!-- Footer -->
 <footer class="site-footer">
   <div class="footer-container">
@@ -378,6 +383,38 @@
   window.onload = bounceTemporarily;
 
   
+  let lastScrollTop = 0;
+  let nav = document.getElementById('mobileNav');
+  let idleTimer;
+
+  function hideNav() {
+    nav.style.opacity = '0';
+    nav.style.transform = 'translateY(100%)';
+  }
+
+  function showNav() {
+    nav.style.opacity = '1';
+    nav.style.transform = 'translateY(0)';
+  }
+
+  window.addEventListener('scroll', function () {
+    let st = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (st < lastScrollTop) {
+      // Scrolling up
+      showNav();
+    } else {
+      // Scrolling down
+      hideNav();
+    }
+
+    lastScrollTop = st <= 0 ? 0 : st;
+
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+      hideNav();
+    }, 3000); // 3 seconds idle = hide
+  });
 
 </script>
 
